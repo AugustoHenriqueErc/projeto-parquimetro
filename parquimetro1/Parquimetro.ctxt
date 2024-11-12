@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.target=Parquimetro
+comment0.text=\r\n\ Representa\ um\ parqu\u00EDmetro\ fracionado\ simplificado.\r\n\ \r\n\ O\ parqu\u00EDmetro\ funciona\ assim\:\r\n\ 1.\ o\ cliente\ seleciona\ a\ quantidade\ de\ tempo\r\n\ \ \ \ de\ estacionamento,\ incrementando-o\r\n\ \ \ \ de\ 15\ em\ 15\ minutos.\r\n\ 2.\ o\ cliente\ insere\ o\ dinheiro\ suficiente\ para\r\n\ \ \ \ pagar\ o\ ticket\ de\ estacionamento.\r\n\ 3.\ o\ cliente\ pede\ para\ imprimir\ o\ ticket.\r\n\ \r\n\ O\ parqu\u00EDmetro\ mant\u00E9m\ o\ total\ de\ dinheiro\ acumulado\r\n\ ao\ longo\ do\ tempo\ em\ que\ est\u00E1\ em\ opera\u00E7\u00E3o.\r\n\ \r\n\ @author\ Daniel\ Conrado\ \r\n\ @version\ 2023\r\n
+comment1.params=pre\u00E7oDaFra\u00E7\u00E3o
+comment1.target=Parquimetro(int)
+comment1.text=\r\n\ Constroi\ um\ novo\ objeto\ Parquimetro\ com\ o\ pre\u00E7o\ unit\u00E1rio\ configurado.\r\n
+comment2.params=quantia
+comment2.target=void\ inserirDinheiro(int)
+comment3.params=
+comment3.target=void\ aumentarTempo()
+comment4.params=horaAtual\ minutoAtual
+comment4.target=void\ imprimirTicket(int,\ int)
+comment5.params=
+comment5.target=int\ getPre\u00E7oUnitario()
+comment6.params=
+comment6.target=int\ getTempoSolicitado()
+comment7.params=
+comment7.target=int\ getBalan\u00E7o()
+comment8.params=
+comment8.target=int\ getTotalApagar()
+numComments=9
