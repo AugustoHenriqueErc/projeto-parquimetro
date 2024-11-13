@@ -27,8 +27,6 @@ public class Parquimetro
     private int balanço;
     // quantidade total de dinheiro acumulado por este parquímetro
     private int total;
-    //armazena quantidade de vezes que o tempo foi solicitado
-    private int aumentarTempoCont = 0;
     //armazena quantidade a pagar
     private int totalApagar;
     //armazena se o parquímetro é turístico ou não
@@ -37,6 +35,10 @@ public class Parquimetro
     private int troco;
     //armazena a rotatividade
     private boolean altaRotatividade = false;
+    //armazena o total que foi esvaziado do parquímetro
+    private int valorRetirado;
+    //se torna false caso o usuário tenha troco a retirar, ou tenha depositado e não tenha impresso o ticket
+    private boolean retirarValor = true;
     
     /**
      * Constroi um novo objeto Parquimetro com o preço unitário configurado.
@@ -47,13 +49,15 @@ public class Parquimetro
         balanço = 0;
         areaTurística = turismo;
         altaRotatividade = rotatividade;
-        if(areaTurística) {
+        if(areaTurística) 
+        {
             tempoSolicitado = 60;
-            total = 150;
+            totalApagar = 150;
         }
-        else{
+        else
+        {
             tempoSolicitado = 15;
-            total = 50;
+            totalApagar = 50;
         }
     }
 
@@ -64,18 +68,30 @@ public class Parquimetro
     
     public void aumentarTempo()
     {
-        if(altaRotatividade){
-            if(aumentarTempoCont > 30) {
-                tempoSolicitado = tempoSolicitado + 15;
+        if(altaRotatividade) 
+        {
+            if(tempoSolicitado >= 30 && tempoSolicitado < 60) 
+            {
+            tempoSolicitado = tempoSolicitado + 15;
             }
-            else if (tempoSolicitado < 120) {
-                tempoSolicitado = tempoSolicitado + 15;
-            }
+            if (tempoSolicitado < 60) 
+            {
+            tempoSolicitado = tempoSolicitado + 15;
+            }    
         }
-            
-        aumentarTempoCont++;
+        else 
+        {
+            if(tempoSolicitado >= 30 && tempoSolicitado < 120) 
+            {
+                tempoSolicitado = tempoSolicitado + 15;
+            }
+            if (tempoSolicitado < 120) 
+            {
+                tempoSolicitado = tempoSolicitado + 15;
+            }         
+        }
     }
-    
+
     public void imprimirTicket(int horaAtual, int minutoAtual)
     {
         if(balanço >= totalApagar && totalApagar!= 0) {
@@ -86,7 +102,6 @@ public class Parquimetro
             System.out.println("|                          |");
             System.out.printf ("| Válido por: %-13s|\n", tempoSolicitado + "min");
             System.out.println("+--------------------------+");
-            
             total = total + balanço;
             balanço = balanço - totalApagar;
             if(areaTurística) {
@@ -95,8 +110,6 @@ public class Parquimetro
             else{
                 tempoSolicitado = 15;
             }
-            tempoSolicitado = 15;
-            aumentarTempoCont = 0;
         }
     }
     
@@ -109,15 +122,31 @@ public class Parquimetro
     {
         return tempoSolicitado;
     }
-    public int devolverTroco() {
+    
+    public int devolverTroco() 
+    {
          troco = balanço;
          balanço = 0;
+         total = total - troco;
          return troco;
     }
+    
+    public int esvaziar() 
+    {
+        if(balanço != 0) {
+        }
+        else {
+            valorRetirado = total;
+            total = 0;
+        }
+        return valorRetirado;
+    }
+    
     public int getBalanço()
     {
         return balanço;
     }
+    
     public int getTotalApagar()
     {
         switch(tempoSolicitado) {
@@ -133,8 +162,10 @@ public class Parquimetro
             case 90: 
                 totalApagar = 200;
                 break;
-            default:
-                totalApagar = 0;
+            case 120:
+                totalApagar = 250;
+                break;
+            default:    
                 break;
         }
         return totalApagar;
