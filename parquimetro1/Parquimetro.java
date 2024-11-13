@@ -31,6 +31,8 @@ public class Parquimetro
     private int aumentarTempoCont = 0;
     //armazena quantidade a pagar
     private int totalApagar;
+    //armazena o troco se existir
+    private int troco;
     
     /**
      * Constroi um novo objeto Parquimetro com o preço unitário configurado.
@@ -50,7 +52,12 @@ public class Parquimetro
     
     public void aumentarTempo()
     {
-        tempoSolicitado = tempoSolicitado + 15;
+        if(aumentarTempoCont != 1) {
+            tempoSolicitado = tempoSolicitado + 15;    
+        }
+        else if (aumentarTempoCont < 4){
+            tempoSolicitado = tempoSolicitado + 15;
+        }
         aumentarTempoCont++;
     }
     
@@ -65,9 +72,10 @@ public class Parquimetro
             System.out.printf ("| Válido por: %-13s|\n", tempoSolicitado + "min");
             System.out.println("+--------------------------+");
             
+            aumentarTempoCont = 0;
             total = total + balanço;
             tempoSolicitado = 15;
-            balanço = 0;
+            balanço = total - totalApagar;
         }
     }
     
@@ -85,6 +93,14 @@ public class Parquimetro
     {
         return balanço;
     }
+    
+    public int devolverTroco()
+    {
+        troco = balanço;
+        balanço = 0;
+        return troco;
+    }
+    
     public int getTotalApagar()
     {
         totalApagar = aumentarTempoCont * 50;
