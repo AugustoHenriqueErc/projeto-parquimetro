@@ -39,7 +39,10 @@ public class Parquimetro
     private int valorRetirado;
     //se torna false caso o usuário tenha troco a retirar, ou tenha depositado e não tenha impresso o ticket
     private boolean retirarValor = true;
-    
+    //armazena o objeto horas
+    private Hora horaSaída;
+    //armazena a string do método tempo
+    private String tempoSaída;
     /**
      * Constroi um novo objeto Parquimetro com o preço unitário configurado.
      */
@@ -93,6 +96,10 @@ public class Parquimetro
 
     public void imprimirTicket(int horaAtual, int minutoAtual)
     {
+        horaSaída = new Hora(horaAtual, minutoAtual);
+        horaSaída.adicionarMinutos(tempoSolicitado);
+        tempoSaída = horaSaída.tempo();
+        
         if(balanço >= totalApagar && totalApagar!= 0) {
             System.out.println("+--------------------------+");
             System.out.println("| Ticket de Zona Azul      |");
@@ -100,6 +107,7 @@ public class Parquimetro
             System.out.printf ("| Início: %02d:%02d            |\n", horaAtual, minutoAtual);
             System.out.println("|                          |");
             System.out.printf ("| Válido por: %-13s|\n", tempoSolicitado + "min");
+            System.out.printf ("| Horário de saída: %s  |", tempoSaída);
             System.out.println("+--------------------------+");
             total = total + balanço;
             balanço = balanço - totalApagar;
