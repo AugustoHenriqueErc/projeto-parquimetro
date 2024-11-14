@@ -60,7 +60,6 @@ public class Parquimetro
             totalApagar = 50;
         }
     }
-
     public void inserirDinheiro(int quantia)
     {
         balanço = balanço + quantia;

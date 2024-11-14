@@ -8,15 +8,16 @@
 public class Hora
 {
     // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
-    private int horaInicial,minutoInicial, horaFinal, minutoFinal;
+    private int horas, minutos;
+    private String período;
 
     /**
      * Construtor para objetos da classe Hora
      */
-    public Hora(int horaAtual, int minutoAtual)
+    public Hora(int hora, int minuto)
     {
-        horaInicial = horaAtual;
-        minutoInicial = minutoAtual;
+        horas = hora;
+        minutos = minuto;
     }
 
     /**
@@ -25,8 +26,21 @@ public class Hora
      * @param  y   um exemplo de um parâmetro de método
      * @return     a soma de x e y 
      */
-    public void getPeríodo (int horaInicial, int horaFinal, int minutoInicial, int minutofinal)
+    public void adicionarMinutos (int adicionarMinutos)
     {
-             
+        minutos = minutos + adicionarMinutos;
+        if(minutos >= 60) 
+        {
+            horas = horas + minutos/60;
+            if(horas / 24 >= 1) 
+            {
+                horas = horas - 24;
+            }
+            minutos = minutos % 60;
+        }
+    }
+    public String tempo (){
+        período = String.format("%d : %d", horas, minutos);
+        return período; 
     }
 }
