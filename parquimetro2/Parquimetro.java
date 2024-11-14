@@ -65,7 +65,14 @@ public class Parquimetro
     }
     public void inserirDinheiro(int quantia)
     {
-        balanço = balanço + quantia;
+        if(balanço + quantia <= 250) 
+        {
+            balanço = balanço + quantia;    
+        }
+        else 
+        {
+            balanço = 250;    
+        }
     }
     
     public void aumentarTempo()
@@ -107,7 +114,8 @@ public class Parquimetro
             System.out.printf ("| Início: %02d:%02d            |\n", horaAtual, minutoAtual);
             System.out.println("|                          |");
             System.out.printf ("| Válido por: %-13s|\n", tempoSolicitado + "min");
-            System.out.printf ("| Horário de saída: %s  |", tempoSaída);
+            System.out.println("|                          |");
+            System.out.printf ("| Horário de saída: %s|\n", tempoSaída);
             System.out.println("+--------------------------+");
             total = total + balanço;
             balanço = balanço - totalApagar;
